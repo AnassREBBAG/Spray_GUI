@@ -5,12 +5,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class SprayOptions extends JPanel {
 
     private JComboBox<String> colorComboBox;
     private JComboBox<Integer> sizeComboBox;
+    private Color[] colors = {Color.RED, Color.GREEN, Color.BLUE};
 
-    public SprayOptions() {
+    
+    public SprayOptions(DrawingPanel drawingPanel) {
         setLayout(new GridLayout(2, 1));
 
         // Initialize components
@@ -22,5 +27,34 @@ public class SprayOptions extends JPanel {
         add(colorComboBox);
         add(new JLabel("Size:"));
         add(sizeComboBox);
+        
+        colorComboBox.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		String selectedColor = (String) colorComboBox.getSelectedItem();
+        		
+        		switch (selectedColor) {
+        		
+	        		case "Red" :
+	        			drawingPanel.setSelectedColor(Color.RED);
+	        			break;
+	        			
+	        		case "Green" :
+	        			drawingPanel.setSelectedColor(Color.GREEN);
+	        			break;
+	        			
+	        		case "Blue" :
+	        			drawingPanel.setSelectedColor(Color.BLUE);
+	        			break;
+	        			
+	        		default : 
+	        			break;
+        		
+        		}
+        	}
+        }
+        		
+        		);
+        
     }
 }
